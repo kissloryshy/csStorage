@@ -43,6 +43,7 @@
             this.btnAccountSetting = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.gridBuys = new System.Windows.Forms.DataGridView();
+            this.btnConst = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBuys)).BeginInit();
             this.SuspendLayout();
@@ -154,6 +155,7 @@
             this.btnReport.TabIndex = 12;
             this.btnReport.Text = "Отчеты";
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // btnPersonal
             // 
@@ -209,11 +211,23 @@
             this.gridBuys.Size = new System.Drawing.Size(979, 95);
             this.gridBuys.TabIndex = 18;
             // 
+            // btnConst
+            // 
+            this.btnConst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnConst.Location = new System.Drawing.Point(545, 555);
+            this.btnConst.Name = "btnConst";
+            this.btnConst.Size = new System.Drawing.Size(212, 25);
+            this.btnConst.TabIndex = 19;
+            this.btnConst.Text = "Конструктор";
+            this.btnConst.UseVisualStyleBackColor = true;
+            this.btnConst.Click += new System.EventHandler(this.btnConst_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 636);
+            this.Controls.Add(this.btnConst);
             this.Controls.Add(this.gridBuys);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAccountSetting);
@@ -261,5 +275,6 @@
         private System.Windows.Forms.Button btnAccountSetting;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridView gridBuys;
+        private System.Windows.Forms.Button btnConst;
     }
 }

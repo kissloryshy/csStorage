@@ -343,6 +343,27 @@ namespace Storage
             gridCustomer.DataSource = ds.Tables[0];
         }
 
+        public static string getMaxSellingId()
+        {
+            SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+            command.CommandText = "getMaxSellingId";
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = "@key";
+            parameter.SqlDbType = SqlDbType.Int;
+            parameter.Direction = ParameterDirection.Output;
+            parameter.Value = -1;
+            command.Parameters.Add(parameter);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            return command.Parameters["@key"].Value.ToString();
+        }
+
         public static void addProvider(string name, string phoneNumber, string company, string address)
         {
             SqlCommand command = new SqlCommand();
@@ -499,6 +520,42 @@ namespace Storage
             parameter.SqlDbType = SqlDbType.DateTime;
             parameter.Direction = ParameterDirection.Input;
             parameter.Value = DateTime.Now;
+            command.Parameters.Add(parameter);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public static void addListOfProducts(string product_id, string selling_id, string amount)
+        {
+            SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+            command.CommandText = "addListOfProducts";
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = "@productId";
+            parameter.SqlDbType = SqlDbType.Int;
+            //parameter.Size = 255;
+            parameter.Direction = ParameterDirection.Input;
+            parameter.Value = product_id;
+            command.Parameters.Add(parameter);
+
+            parameter = new SqlParameter();
+            parameter.ParameterName = "@sellingId";
+            parameter.SqlDbType = SqlDbType.Int;
+            //parameter.Size = 255;
+            parameter.Direction = ParameterDirection.Input;
+            parameter.Value = selling_id;
+            command.Parameters.Add(parameter);
+
+            parameter = new SqlParameter();
+            parameter.ParameterName = "@amount";
+            parameter.SqlDbType = SqlDbType.Int;
+            //parameter.Size = 255;
+            parameter.Direction = ParameterDirection.Input;
+            parameter.Value = amount;
             command.Parameters.Add(parameter);
 
             connection.Open();

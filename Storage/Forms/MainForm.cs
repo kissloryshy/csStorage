@@ -228,12 +228,6 @@ namespace Storage
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            if (gridBuys.Rows.Count == 0)
-            {
-                MessageBox.Show("Ошибка, корзина пуста");
-                return;
-            }
-
             //check amount
             for (int i = 0; i < gridBuys.Rows.Count; i++)
             {
@@ -243,7 +237,7 @@ namespace Storage
 
                 if (storageAmount - Int32.Parse(amount) < 0)
                 {
-                    MessageBox.Show("Ощибка. Недостаточно товаров");
+                    MessageBox.Show("Ошибка. Недостаточно товаров");
                     return;
                 }
             }
@@ -253,22 +247,15 @@ namespace Storage
             {
                 string key = gridBuys.Rows[i].Cells["Key"].Value.ToString();
                 string amount = gridBuys.Rows[i].Cells["Amount"].Value.ToString();
-                //SQLTasks.updateProductAmount(key, amount);
+                SQLTasks.updateProductAmount(key, amount);
             }
 
             SQLTasks.getProducts(gridProducts);
-
-            //clear buys
-            for (int i = 0; i < gridBuys.Rows.Count; i++)
-            {
-                gridBuys.Rows.RemoveAt(i);
-            }
 
             //selected customer
             Customer customer = new Customer();
             customer.ShowDialog();
             string id = customer.idCustomer;
-
             Console.WriteLine(id);
 
             if (id == "")
@@ -280,7 +267,34 @@ namespace Storage
             {
                 //create selling
                 SQLTasks.addSelling(int.Parse(id), int.Parse(idEmployee));
+
+                //create listOfProducts
+                //Products_id, Selling_id, Amount
+                for (int i = 0; i < gridBuys.Rows.Count; i++)
+                {
+                    SQLTasks.addListOfProducts(
+                        gridBuys.Rows[i].Cells["Key"].Value.ToString(),
+                        SQLTasks.getMaxSellingId(),
+                        gridBuys.Rows[i].Cells["Amount"].Value.ToString());
+                }
             }
+
+            //clear buys
+            for (int i = gridBuys.Rows.Count - 1; i >= 0; i--)
+            {
+                gridBuys.Rows.RemoveAt(i);
+            }
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConst_Click(object sender, EventArgs e)
+        {
+            Const @const = new Const();
+            @const.Show();
         }
     }
 }
