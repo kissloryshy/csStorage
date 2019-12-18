@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Storage.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -88,7 +89,7 @@ namespace Storage
             else
             {
                 this.Hide();
-                MainForm f2 = new MainForm(employerName, position, permitions, this, idEmployee);
+                MainForm2 f2 = new MainForm2(employerName, position, permitions, this, idEmployee);
                 f2.Show();
             }
         }
